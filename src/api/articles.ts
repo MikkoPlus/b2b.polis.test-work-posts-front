@@ -1,19 +1,19 @@
-import type { Article } from '../types/article';
-import type { Comment } from '../types/article';
-import articlesData from '../data/articles.json';
-import commentsData from '../data/comments.json';
+import type { IArticle } from "@/components/Article/articleTypes.ts";
+import type { IComment } from "@/components/Comment/commentTypes";
+import articlesData from "../data/articles.json";
+import commentsData from "../data/comments.json";
 
-const articles: Article[] = articlesData as Article[];
-const comments: Comment[] = commentsData as Comment[];
+const articles: IArticle[] = articlesData as IArticle[];
+const comments: IComment[] = commentsData as IComment[];
 
-export function getAllArticles(): Article[] {
+export function getAllArticles(): IArticle[] {
   return articles;
 }
 
-export function getArticleById(id: number): Article | undefined {
-  return articles.find((a) => a.id === id);
+export function getArticleById(id: number): IArticle | null {
+  return articles.find((a) => a.id === id) ?? null;
 }
 
-export function getCommentsByArticleId(articleId: number): Comment[] {
-  return comments.filter((c) => c.article_id === articleId);
+export function getCommentsByArticleId(articleId: number): IComment[] | null {
+  return comments.filter((c) => c.article_id === articleId) ?? null;
 }

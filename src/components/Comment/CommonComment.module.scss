@@ -1,0 +1,115 @@
+.comment {
+  padding: 1rem 1.25rem;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  border-left: 4px solid #333;
+  list-style: none;
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__author {
+    font-weight: 600;
+    font-size: 16px;
+    color: #232323;
+  }
+
+  &__date {
+    font-size: 14px;
+    color: #939598;
+  }
+
+  &__content {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+    overflow-wrap: break-word;
+  }
+}
+
+.form {
+  padding: 1.25rem;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  border-left: 4px solid #333;
+
+  &__field {
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #232323;
+    margin-bottom: 0.375rem;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 16px;
+    color: #232323;
+    background: #fff;
+    border: 1px solid #333;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: #939598;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #232323;
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 16px;
+    font-family: inherit;
+    color: #232323;
+    background: #fff;
+    border: 1px solid #333;
+    border-radius: 0.25rem;
+    resize: vertical;
+    min-height: 100px;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: #939598;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #232323;
+    }
+  }
+
+  &__submit {
+    padding: 0.5rem 1.25rem;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: #333;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #232323;
+    }
+  }
+}
