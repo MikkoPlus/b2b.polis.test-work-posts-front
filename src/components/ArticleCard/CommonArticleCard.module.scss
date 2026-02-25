@@ -1,0 +1,68 @@
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  height: 100%;
+  border: 1px solid #333;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  &__link {
+    padding: 1rem;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  &__date {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.25;
+    color: #939598;
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 1.25;
+    color: #232323;
+    font-weight: 600;
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    @media screen and (max-width: 991px) {
+      font-size: 20px;
+    }
+    @media screen and (max-width: 767px) {
+      font-size: 18px;
+    }
+  }
+
+  &__txt {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.25;
+    color: #232323;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    flex: 1;
+    @media screen and (max-width: 991px) {
+      font-size: 16px;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  &__follow {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.25;
+  }
+}
