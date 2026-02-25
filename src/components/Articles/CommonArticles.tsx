@@ -1,8 +1,8 @@
-import type { ArticleCard } from "../ArticleCard/articleCardTypes";
-import { CommonArticleCard } from "../ArticleCard/CommonArticleCard";
+import type { IArticle } from "@/components/Article/articleTypes.ts";
+import { CommonArticleCard } from "@/components/ArticleCard/CommonArticleCard";
 import styles from "./CommonArticles.module.scss";
 
-export const CommonArticles: React.FC<{ articles: ArticleCard[] }> = ({ articles }) => {
+export const CommonArticles: React.FC<{ articles: IArticle[] }> = ({ articles }) => {
   if (!articles || articles.length === 0) return null;
 
   return (
