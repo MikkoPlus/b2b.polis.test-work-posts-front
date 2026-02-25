@@ -1,10 +1,10 @@
 import { getAllArticles } from "@/api/articles";
 import { CommonArticles } from "@/components/Articles/CommonArticles";
-import type { ArticleCard } from "@/components/ArticleCard/articleCardTypes";
+import type { IArticle } from "@/components/Article/articleTypes";
 import styles from "./ArticlesPage.module.scss";
 
-export function ArticlesPage() {
-  const articles: ArticleCard[] = getAllArticles();
+export const ArticlesPage = () => {
+  const articles: IArticle[] = getAllArticles();
 
   return (
     <div className="wrapper">
@@ -21,4 +21,4 @@ export function ArticlesPage() {
       )}
     </div>
   );
-}
+};
