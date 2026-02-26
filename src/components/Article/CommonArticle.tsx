@@ -2,23 +2,30 @@ import { useState } from "react";
 import { formatDate } from "@/helpers/helperFuncions";
 import { Link } from "react-router-dom";
 import type { IArticleDetail } from "./articleTypes";
-import type { IComment } from "../Comment/commentTypes";
+import type { IComment, ICommentFormData } from "../Comment/commentTypes";
 import { CommonComment } from "../Comment/CommonComment";
 import { CommonCommentForm } from "../Comment/CommonCommentForm";
 import styles from "./CommonArticle.module.scss";
+import { postComment } from "@/api/fetch";
 
 export const CommonArticle: React.FC<IArticleDetail> = ({ article, comments: initialComments }) => {
   const [comments, setComments] = useState<IComment[]>(initialComments ?? []);
 
-  const handleAddComment = (data: { authorName: string; content: string }) => {
-    const newComment: IComment = {
-      id: Date.now(),
-      articleId: article.id,
-      authorName: data.authorName,
+  const handleAddComment = async (data: ICommentFormData) => {
+    const newComment: ICommentFormData = {
+      author_name: data.author_name,
       content: data.content,
-      createdAt: new Date().toISOString(),
     };
-    setComments((prev) => [...prev, newComment]);
+
+    try {
+      const response = await postComment(article.id, newComment);
+
+      if (response) {
+        setComments((prev) => [...prev, response]);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -27,10 +34,15 @@ export const CommonArticle: React.FC<IArticleDetail> = ({ article, comments: ini
         К списку статей
       </Link>
       <h1 className={styles.article__title}>{article.title}</h1>
-      <span className={styles.article__date}>{formatDate(article.createdAt)}</span>
+      <div className={styles.article__meta}>
+        <span className={styles.article__date}>{formatDate(article.created_at)}</span>
+        <span className={styles.article__author}>{article.author_name}</span>
+      </div>
 
-      {article.preview && article.preview.src && (
-        <img className={styles.card__preview} src={article.preview.src} alt={article.preview.alt ?? ""} />
+      {article.preview ? (
+        <img className={styles.article__preview} src={article.preview} alt={article.title ?? ""} />
+      ) : (
+        <img className={styles.article__preview} src="/preview.png" alt={article.title ?? ""} />
       )}
 
       <div className={styles.article__content}>

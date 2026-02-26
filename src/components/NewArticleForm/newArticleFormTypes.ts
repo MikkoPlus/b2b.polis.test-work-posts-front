@@ -1,5 +1,5 @@
-export interface NewArticleFormData {
+export interface IArticleFormData {
   title: string;
-  authorName: string;
+  author_name: string;
   content: string;
 }
