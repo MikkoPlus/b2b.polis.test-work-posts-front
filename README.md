@@ -43,12 +43,10 @@
 
 Frontend ожидает REST API на том же домене с префиксом `/api` (по умолчанию `http://localhost:8000/api`).
 
-### Запуск frontend
-
-В папке `front`:
+### Запуск
 
 ```bash
-npm install
+npm i
 npm run dev
 ```
 
@@ -59,7 +57,6 @@ npm run dev
 ### Сборка для продакшена
 
 ```bash
-cd front
 npm run build
 ```
 
