@@ -1,13 +1,13 @@
 export interface IComment {
   id: number;
-  articleId: number;
-  authorName: string;
+  article_id: number;
+  author_name: string;
   content: string;
-  createdAt: string;
+  created_at: string;
 }
 
 export interface ICommentFormData {
-  authorName: string;
+  author_name: string;
   content: string;
 }
 

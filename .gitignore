@@ -2,6 +2,7 @@ node_modules/*
 public/
 dist/
 *.local
+.env
 package-lock.json
 
 # Editor directories and files

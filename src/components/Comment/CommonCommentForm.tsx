@@ -10,7 +10,7 @@ export const CommonCommentForm: React.FC<ICommentForm> = ({ onSubmit }) => {
     e.preventDefault();
     if (!authorName.trim() || !content.trim()) return;
 
-    onSubmit({ authorName: authorName.trim(), content: content.trim() });
+    onSubmit({ author_name: authorName.trim(), content: content.trim() });
     setAuthorName("");
     setContent("");
   };

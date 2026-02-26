@@ -1,33 +1,42 @@
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import type { IArticle } from "@/components/Article/articleTypes";
 import styles from "./CommonNewArticleForm.module.scss";
-import type { NewArticleFormData } from "./newArticleFormTypes";
+import type { IArticleFormData } from "./newArticleFormTypes";
+import { postArticle } from "@/api/fetch";
 
 export const CommonNewArticleForm: React.FC = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState<NewArticleFormData>({
+  const [form, setForm] = useState<IArticleFormData>({
     title: "",
-    authorName: "",
+    author_name: "",
     content: "",
   });
 
-  const handleChange = (field: keyof NewArticleFormData) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (field: keyof IArticleFormData) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!form.title.trim() || !form.authorName.trim() || !form.content.trim()) return;
+    if (!form.title.trim() || !form.author_name.trim() || !form.content.trim()) return;
 
-    const draft: Omit<IArticle, "id" | "createdAt"> = {
+    const draft: IArticleFormData = {
       title: form.title.trim(),
-      authorName: form.authorName.trim(),
+      author_name: form.author_name.trim(),
       content: form.content.trim(),
     };
 
-    console.log("Новая статья (черновик):", draft);
-    navigate("/articles");
+    try {
+      await postArticle(draft).then((data) => {
+        if (data && data.id) {
+          navigate("/articles/" + data.id);
+        } else {
+          navigate("/articles");
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -54,8 +63,8 @@ export const CommonNewArticleForm: React.FC = () => {
           id="article-author"
           className={styles.form__input}
           type="text"
-          value={form.authorName}
-          onChange={handleChange("authorName")}
+          value={form.author_name}
+          onChange={handleChange("author_name")}
           placeholder="Введите имя автора"
           required
         />

@@ -9,6 +9,12 @@
     transform: translateY(-5px);
   }
 
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
   &__link {
     padding: 1rem;
     color: #333;
