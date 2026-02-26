@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+## Frontend (React клиент)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Этот модуль отвечает за пользовательский интерфейс мини‑приложения для работы со статьями и комментариями.
 
-Currently, two official plugins are available:
+### Используемые технологии
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19**
+- **TypeScript**
+- **Vite** — сборка и dev‑сервер
+- **React Router** — маршрутизация
+- **SCSS‑modules** — стилизация компонентов
 
-## React Compiler
+### Маршруты приложения
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Маршрутизация настроена в `src/App.tsx`.
 
-## Expanding the ESLint configuration
+- **`/` — главная страница (`HomePage`)**
+  - Краткое описание приложения.
+  - Ссылки:
+    - «Список статей» → `/articles`
+    - «Создать статью» → `/newArticle`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **`/articles` — список статей (`ArticlesPage`)**
+  - Загружает список статей с backend API (`GET /api/articles`).
+  - Показывает карточки статей (заголовок, автор, дата/краткое содержимое).
+  - Переход к детальной странице статьи по клику.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **`/articles/:id` — детальная страница статьи (`ArticlePage`)**
+  - Загружает статью и её комментарии (`GET /api/articles/{id}`).
+  - Отображает заголовок, текст, автора.
+  - Список комментариев.
+  - Форма добавления нового комментария (отправка на `POST /api/articles/{id}/comments`).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **`/newArticle` — создание статьи (`NewArticlePage`)**
+  - Форма с полями:
+    - `title` — заголовок статьи
+    - `content` — текст статьи
+    - `author_name` — имя автора
+  - Отправка данных на backend (`POST /api/articles`).
+  - После успешного создания возможно перенаправление на список или детальную страницу.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Взаимодействие с backend
+
+Frontend ожидает REST API на том же домене с префиксом `/api` (по умолчанию `http://localhost:8000/api`).
+
+### Запуск frontend
+
+В папке `front`:
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Приложение будет доступно по адресу (по умолчанию):
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `http://localhost:5173`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Сборка для продакшена
+
+```bash
+cd front
+npm run build
+```
+
+Просмотр собранной версии:
+
+```bash
+npm run preview
+```
+
+### Линтинг
+
+```bash
+npm run lint
 ```
