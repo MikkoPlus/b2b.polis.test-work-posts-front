@@ -3,7 +3,7 @@ import type { IComment, ICommentFormData } from "@/components/Comment/commentTyp
 import type { IArticleFormData } from "@/components/NewArticleForm/newArticleFormTypes";
 
 export async function getAllArticles(): Promise<IArticle[]> {
-  const response = await fetch(`/api/articles`).then((response) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/articles`).then((response) => {
     if (!response.ok) {
       throw new Error(`Failed to fetch all articles: ${response.statusText}`);
     }
@@ -13,7 +13,7 @@ export async function getAllArticles(): Promise<IArticle[]> {
 }
 
 export async function getArticleById(id: number): Promise<IArticleDetail> {
-  const response = await fetch(`/api/articles/${id}`).then((response) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/articles/${id}`).then((response) => {
     if (!response.ok) {
       throw new Error(`Failed to fetch article: ${response.statusText}`);
     }
@@ -23,7 +23,7 @@ export async function getArticleById(id: number): Promise<IArticleDetail> {
 }
 
 export async function postArticle(data: IArticleFormData): Promise<IArticle> {
-  const response = await fetch(`/api/articles/`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/articles/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -39,7 +39,7 @@ export async function postArticle(data: IArticleFormData): Promise<IArticle> {
 }
 
 export async function postComment(id: number, data: ICommentFormData): Promise<IComment> {
-  const response = await fetch(`/api/articles/${id}/comments`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/articles/${id}/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
