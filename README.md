@@ -45,6 +45,12 @@ Frontend ожидает REST API на том же домене с префикс
 
 ### Запуск
 
+Создайте .env файл с указанием адреса запросов
+
+```bash
+touch .env && echo "VITE_API_URL=http://localhost:8000" > .env
+```
+
 ```bash
 npm i
 npm run dev
